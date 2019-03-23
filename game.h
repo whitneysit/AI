@@ -2,7 +2,9 @@
 #define GAME
 
 #include "hero.h"
+#include "node.h"
 #include <set>
+#include <list>
 #include <fstream>
 
 using namespace std; 
@@ -13,16 +15,22 @@ class game
 {
 
 	private:
-		set<hero*> heroes;
+		list<hero*> heroes;
 		string filename;
 		int numberOfHeroes; 
 		enum Algorithm algorithm;
+		node makeTreeHelper(node& root, list<hero*> remaining, int& leafNodeNum, int depth);
+		node root;
+		int depth; 
 
 	public:	
 		game(string filename);
 		~game(){};
 
 		void printAllHeroes();
+		void findMinimax();
+		void findNext();
+		void makeTree();
 		
 };
 

@@ -1,4 +1,4 @@
-CFLAGS = -O
+CFLAGS = -O -g
 CC = g++ -std=c++11
 
 main: hero.o game.o main.cpp

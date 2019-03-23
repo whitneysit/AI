@@ -16,9 +16,9 @@ public:
 
 	
 	int getHeroID(){ return this->heroID; }
-	int getPower(){ return this->power; }
-	int getTeamMastery(){ return this->teamMastery; }
-	int getOpponentMastery(){ return this->opponentMastery; }
+	double getPower(){ return this->power; }
+	double getTeamMastery(){ return this->teamMastery; }
+	double getOpponentMastery(){ return this->opponentMastery; }
 	void setMembershipIndicator(int membershipIndicator){ this->membershipIndicator = membershipIndicator; }
 	int getMembershipIndicator(){ return this->membershipIndicator; }
 
