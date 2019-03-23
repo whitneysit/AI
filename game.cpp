@@ -101,11 +101,17 @@ node game::makeTreeHelper(node& rootNode, list<hero*> remaining, int& leafNodeNu
 		// cout << endl;
 		//(rootNode.childrenNodes).push_back(makeTreeHelper(newNode, newList, leafNodeNum, depth+1));
 		newNode = makeTreeHelper(newNode, newList, leafNodeNum, depth+1);
-		cout << "depth: " << depth << " " <<  newNode.advantage << " " << newNode.heroObject->getHeroID() << endl;
-		if(!isRadiant){
+		//cout << "depth: " << depth << " " <<  newNode.advantage << " " << newNode.heroObject->getHeroID() << endl;
+		if(isRadiant){
 			if(newNode.advantage > currMaxOrMinNum){
 				currMaxOrMinNum = newNode.advantage;
 				currMaxOrMinNode = newNode;
+				if (this->algorithm == AB){
+					rootNode.alpha = max(rootNode.alpha, newNode.advantage);
+					if (rootNode.beta <= rootNode.alpha){
+						break; 
+					}
+				}
 			}
 		}
 		else {
@@ -113,12 +119,19 @@ node game::makeTreeHelper(node& rootNode, list<hero*> remaining, int& leafNodeNu
 				currMaxOrMinNum = newNode.advantage;
 				currMaxOrMinNode = newNode;
 			}
+			if (this->algorithm == AB){
+				rootNode.beta = min(rootNode.beta, newNode.advantage);
+				if (rootNode.beta <= rootNode.alpha){
+					break; 
+				}
+			}
 
 		}
 	}
 	rootNode.currentRadiantLineUp = currMaxOrMinNode.currentRadiantLineUp;
 	rootNode.currentDireLineUp = currMaxOrMinNode.currentDireLineUp;
 	rootNode.advantage = currMaxOrMinNum;
+
 	/*for (auto h : rootNode.currentRadiantLineUp){
 		cout << h->getHeroID() << " ";
 	}
@@ -126,13 +139,14 @@ node game::makeTreeHelper(node& rootNode, list<hero*> remaining, int& leafNodeNu
 		cout << h->getHeroID() << " ";
 	}
 	cout << endl; */
-	cout << currMaxOrMinNum << " " << rootNode.advantage << endl; 
+	//cout << currMaxOrMinNum << " " << rootNode.advantage << endl; 
 	return rootNode; 
 }
 
 void game::makeTree(){
 	node rootNode;
 	list<hero*> remaining(heroes.begin(), heroes.end());
+	int counter = 0;
 	for (auto h : heroes){
 		if(h->getMembershipIndicator() == 1){
 			rootNode.addToRadiantLineUp(h);
@@ -147,14 +161,15 @@ void game::makeTree(){
 	int leafNodeNum = 0; 
 	this->root = makeTreeHelper(rootNode, remaining, leafNodeNum, 0);
 	int nextHero = 0; 
-	for (list<hero*>::iterator it = this->root.currentRadiantLineUp.begin(); it != this->root.currentRadiantLineUp.end(); it++){
+	cout << endl;
+	for (vector<hero*>::iterator it = this->root.currentRadiantLineUp.begin(); it != this->root.currentRadiantLineUp.end(); it++){
 		cout << (*it)->getHeroID() << endl;
 		if ((*it)->getMembershipIndicator() == 0 && nextHero == 0){
 			nextHero = (*it)->getHeroID(); 
 		}
 	}
 	cout << endl; 
-	for (list<hero*>::iterator it = this->root.currentDireLineUp.begin(); it != this->root.currentDireLineUp.end(); it++){
+	for (vector<hero*>::iterator it = this->root.currentDireLineUp.begin(); it != this->root.currentDireLineUp.end(); it++){
 		cout << (*it)->getHeroID() << endl;
 	}
 
