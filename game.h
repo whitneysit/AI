@@ -19,7 +19,7 @@ class game
 		string filename;
 		int numberOfHeroes; 
 		enum Algorithm algorithm;
-		node makeTreeHelper(node& root, list<hero*> remaining, int& leafNodeNum, int depth);
+		node makeTreeHelper(node& root, list<hero*> remaining, int& leafNodeNum, int depth, double alpha, double beta);
 		node root;
 		int depth; 
 
@@ -28,9 +28,7 @@ class game
 		~game(){};
 
 		void printAllHeroes();
-		void findMinimax();
-		void findNext();
-		void makeTree();
+		int makeTree();
 		
 };
 

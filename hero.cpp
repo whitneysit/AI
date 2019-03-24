@@ -13,9 +13,9 @@ hero::hero(int heroID, double power, double teamMastery, double opponentMastery,
 }
 
 void hero::printStats(){
-	cout << "Hero ID: " << this->heroID << endl; 
-	cout << "Power: " << this->power << endl;
-	cout << "Team Mastery: " << this->teamMastery << endl;
-	cout << "Opponent Mastery: " << this->opponentMastery << endl; 
-	cout << "Membership Indicator: " << this->membershipIndicator << endl << endl;
+	// cout << "Hero ID: " << this->heroID << endl; 
+	// cout << "Power: " << this->power << endl;
+	// cout << "Team Mastery: " << this->teamMastery << endl;
+	// cout << "Opponent Mastery: " << this->opponentMastery << endl; 
+	// cout << "Membership Indicator: " << this->membershipIndicator << endl << endl;
 }

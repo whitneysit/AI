@@ -22,13 +22,9 @@ class node
 		double advantage; 
 		node(hero* hero){
 			this->heroObject = hero;
-			this->alpha =  numeric_limits<int>::min();
-			this->beta = numeric_limits<int>::max();
 		}
 		node(){
 			this->heroObject = nullptr;
-			this->alpha =  numeric_limits<int>::min();
-			this->beta = numeric_limits<int>::max();
 		}
 		
 
@@ -66,12 +62,11 @@ class node
 				}
 				advantage += (h->getPower() * h->getTeamMastery());
 				advantage += 100; 
-				cout << h->getHeroID() << " "; 
+				//cout << h->getHeroID() << " "; 
 			}
-			cout << endl << endl;
 			if (isRadiantUnique){
 				advantage += 120; 
-				cout << "Radiant is Unique" << endl << endl; 
+				//cout << "Radiant is Unique" << endl << endl; 
 			}
 			for (int i = 0; i < currentDireLineUp.size(); i++){
 				hero* h = currentDireLineUp[i];
@@ -83,12 +78,11 @@ class node
 				}
 				advantage -= (h->getPower() * h->getOpponentMastery());
 				advantage -= 100; 
-				cout << h->getHeroID() << " "; 
+				//cout << h->getHeroID() << " "; 
 			}
-			cout << endl;
 			if (isDireUnique){
 				advantage -= 120; 
-				cout << "Dire is Unique" << endl << endl; 
+				//cout << "Dire is Unique" << endl << endl; 
 			}
 			return advantage;
 		}

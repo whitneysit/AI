@@ -1,11 +1,14 @@
 #include <iostream>
 #include "game.h"
+#include <fstream>
 
 using namespace std; 
 
 int main (int argc, char *argv[]){
-	cout << "hello world" << endl; 
-	game newGame("test_case/input2.txt");
-	newGame.makeTree();
+	game newGame("input.txt");
+	ofstream outFile("output.txt");
+	int nextHero = newGame.makeTree();
+	outFile << nextHero << '\n';
+	outFile.close();
 	return 0; 
 }
